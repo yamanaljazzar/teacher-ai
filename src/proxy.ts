@@ -11,7 +11,7 @@ const authRoutes = ['/auth/login', '/auth/register'];
 
 // ----------------------------------------------------------------------
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const sessionToken = request.cookies.get(SESSION_COOKIE)?.value;
 
