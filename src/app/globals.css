@@ -5,7 +5,7 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --radius: 0.625rem;
+  --radius: 0.625rem; 
   --background: #F5F0FF;
   --foreground: #1a1a2e;
   --primary: #3E256B;
@@ -30,6 +30,10 @@
   --chart-3: oklch(0.398 0.07 227.392);
   --chart-4: oklch(0.828 0.189 84.429);
   --chart-5: oklch(0.769 0.188 70.08);
+  --input-bg: #F6F2FF;
+  --input-placeholder: #A89ED3;
+  --input-label: #6948B8;
+  --input-asterisk: #DC64C9;
   --sidebar: #F5F0FF;
   --sidebar-foreground: #1a1a2e;
   --sidebar-primary: #3E256B;
@@ -65,6 +69,10 @@
   --chart-3: oklch(0.769 0.188 70.08);
   --chart-4: oklch(0.627 0.265 303.9);
   --chart-5: oklch(0.645 0.246 16.439);
+  --input-bg: #2a2038;
+  --input-placeholder: #6b5f7d;
+  --input-label: #b89ceb;
+  --input-asterisk: #e08cd8;
   --sidebar: #1c1528;
   --sidebar-foreground: #e8e0f5;
   --sidebar-primary: #b89ceb;
@@ -109,6 +117,10 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  --color-input-bg: var(--input-bg);
+  --color-input-placeholder: var(--input-placeholder);
+  --color-input-label: var(--input-label);
+  --color-input-asterisk: var(--input-asterisk);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
