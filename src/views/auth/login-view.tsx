@@ -2,6 +2,7 @@
 
 import { z } from 'zod';
 import Link from 'next/link';
+import { m } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 import { useState, useTransition } from 'react';
 import { standardSchemaResolver } from '@hookform/resolvers/standard-schema';
@@ -62,88 +63,95 @@ export default function LoginView() {
   });
 
   return (
-    <Card className="w-full max-w-lg">
-      <CardHeader className="gap-6">
-        <Logo disabled className="h-20 w-20 sm:h-25 sm:w-25 place-self-center" />
-        <div className="flex flex-col items-center gap-2 text-center">
-          <h1 className="text-2xl font-bold text-primary sm:text-4xl md:text-[45px]">
-            أهلاً بك يا بطل! 👋
-          </h1>
-          <p className="text-sm font-medium text-secondary sm:text-base md:text-[22px]">
-            جاهز تبدأ رحلة التعلّم الذكي والممتع؟
-          </p>
-        </div>
-      </CardHeader>
-
-      <CardContent>
-        <Form methods={methods} onSubmit={onSubmit}>
-          <div className="flex w-full flex-col gap-5">
-            {methods.formState.errors.root && (
-              <Alert variant="destructive">
-                <CircleAlert />
-                <AlertDescription>{methods.formState.errors.root.message}</AlertDescription>
-              </Alert>
-            )}
-
-            <RHFTextField
-              name="email"
-              label="البريد الإلكتروني"
-              required
-              type="email"
-              placeholder="أدخل البريد الإلكتروني الخاص بك"
-              icon={<UserRound size={24} />}
-              disabled={isPending}
-            />
-
-            <RHFTextField
-              name="password"
-              label="كلمة المرور"
-              required
-              type={showPassword ? 'text' : 'password'}
-              placeholder="أدخل كلمة المرور الخاصة بك"
-              icon={<Lock size={24} />}
-              disabled={isPending}
-              suffix={
-                <Button
-                  type="button"
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => setShowPassword((prev) => !prev)}
-                  disabled={isPending}
-                >
-                  {showPassword ? <EyeOff size={24} /> : <Eye size={24} />}
-                </Button>
-              }
-            />
-
-            <Button
-              type="submit"
-              size="lg"
-              isPending={isPending}
-              className="mt-2 w-full bg-linear-to-r from-[#B656C0] to-secondary text-xl font-bold text-white"
-            >
-              ابدأ التعلّم الآن
-              <Rocket size={24} />
-            </Button>
+    <m.div
+      className="w-full max-w-lg mx-auto"
+      initial={{ opacity: 0, scale: 0.95, y: 20 }}
+      animate={{ opacity: 1, scale: 1, y: 0 }}
+      transition={{ duration: 0.4, ease: 'easeOut' }}
+    >
+      <Card className="w-full">
+        <CardHeader className="gap-6">
+          <Logo disabled className="h-20 w-20 sm:h-25 sm:w-25 place-self-center" />
+          <div className="flex flex-col items-center gap-2 text-center">
+            <h1 className="text-2xl font-bold text-primary sm:text-4xl md:text-[45px]">
+              أهلاً بك يا بطل! 👋
+            </h1>
+            <p className="text-sm font-medium text-secondary sm:text-base md:text-[22px]">
+              جاهز تبدأ رحلة التعلّم الذكي والممتع؟
+            </p>
           </div>
-        </Form>
-      </CardContent>
+        </CardHeader>
 
-      <CardFooter className="justify-center gap-6">
-        <Link
-          href={paths.forgotPassword}
-          className="text-xs text-secondary hover:text-secondary md:text-base"
-        >
-          نسيت كلمة المرور؟
-        </Link>
-        <Separator />
-        <p className="text-center text-base font-bold text-secondary sm:text-lg">
-          ليس لديك حساب؟{' '}
-          <Link href={paths.register} className="hover:underline">
-            أنشئ حسابك الآن 🌟
+        <CardContent>
+          <Form methods={methods} onSubmit={onSubmit}>
+            <div className="flex w-full flex-col gap-5">
+              {methods.formState.errors.root && (
+                <Alert variant="destructive">
+                  <CircleAlert />
+                  <AlertDescription>{methods.formState.errors.root.message}</AlertDescription>
+                </Alert>
+              )}
+
+              <RHFTextField
+                name="email"
+                label="البريد الإلكتروني"
+                required
+                type="email"
+                placeholder="أدخل البريد الإلكتروني الخاص بك"
+                icon={<UserRound size={24} />}
+                disabled={isPending}
+              />
+
+              <RHFTextField
+                name="password"
+                label="كلمة المرور"
+                required
+                type={showPassword ? 'text' : 'password'}
+                placeholder="أدخل كلمة المرور الخاصة بك"
+                icon={<Lock size={24} />}
+                disabled={isPending}
+                suffix={
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="icon"
+                    onClick={() => setShowPassword((prev) => !prev)}
+                    disabled={isPending}
+                  >
+                    {showPassword ? <EyeOff size={24} /> : <Eye size={24} />}
+                  </Button>
+                }
+              />
+
+              <Button
+                type="submit"
+                size="lg"
+                isPending={isPending}
+                className="mt-2 w-full bg-linear-to-r from-[#B656C0] to-secondary text-xl font-bold text-white"
+              >
+                ابدأ التعلّم الآن
+                <Rocket size={24} />
+              </Button>
+            </div>
+          </Form>
+        </CardContent>
+
+        <CardFooter className="justify-center gap-6">
+          <Link
+            href={paths.forgotPassword}
+            className="text-xs text-secondary hover:text-secondary md:text-base"
+          >
+            نسيت كلمة المرور؟
           </Link>
-        </p>
-      </CardFooter>
-    </Card>
+          <Separator />
+          <p className="text-center text-base font-bold text-secondary sm:text-lg">
+            ليس لديك حساب؟{' '}
+            <Link href={paths.register} className="hover:underline">
+              أنشئ حسابك الآن 🌟
+            </Link>
+          </p>
+        </CardFooter>
+      </Card>
+    </m.div>
   );
 }
