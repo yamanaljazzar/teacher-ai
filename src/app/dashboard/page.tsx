@@ -5,8 +5,6 @@ import { LogoutButton } from './logout-button';
 export const metadata = { title: 'لوحة التحكم | Teacher AI' };
 
 export default async function DashboardPage() {
-  await new Promise((resolve) => setTimeout(resolve, 500));
-
   return (
     <div className="flex min-h-screen flex-col items-center justify-center gap-6 bg-background p-8">
       <h1 className="text-3xl font-bold text-primary">مرحباً بك في لوحة التحكم 🎉</h1>
