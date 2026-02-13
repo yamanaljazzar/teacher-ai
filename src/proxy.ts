@@ -2,9 +2,8 @@ import type { NextRequest } from 'next/server';
 
 import { NextResponse } from 'next/server';
 
+import { SESSION_COOKIE } from 'src/lib/session';
 // ----------------------------------------------------------------------
-
-const SESSION_COOKIE = 'session_token';
 
 const protectedRoutes = ['/dashboard'];
 const authRoutes = ['/auth/login', '/auth/register'];

@@ -15,10 +15,10 @@ import { Card, CardFooter, CardHeader, CardContent } from 'src/components/ui/car
 
 import { paths } from 'src/routes/paths';
 
-import { loginAction } from 'src/actions/auth';
-
 import { Logo } from 'src/components/logo';
 import { Form, RHFTextField } from 'src/components/hook-form';
+
+import { loginAction } from 'src/auth/actions';
 
 // ----------------------------------------------------------------------
 

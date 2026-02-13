@@ -5,7 +5,7 @@ import { LogOut } from 'lucide-react';
 
 import { Button } from 'src/components/ui/button';
 
-import { logoutAction } from 'src/actions/auth';
+import { logoutAction } from 'src/auth/actions';
 
 // ----------------------------------------------------------------------
 

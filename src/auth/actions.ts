@@ -6,14 +6,21 @@ import { redirect } from 'next/navigation';
 
 import { paths } from 'src/routes/paths';
 
+import { decrypt, createSession, deleteSession, SESSION_COOKIE } from 'src/lib/session';
+
 // ----------------------------------------------------------------------
 
 const MOCK_USER = {
   email: 'user@teacher.ai',
   password: 'password123',
+  role: 'TEACHER',
+  name: 'Yaman Aljazzar',
+  avatar: 'https://i.pravatar.cc/300',
+  emailVerified: true,
+  createdAt: new Date(),
+  updatedAt: new Date(),
+  id: '1',
 };
-
-const SESSION_COOKIE = 'session_token';
 
 const loginSchema = z.object({
   email: z.string().min(1).email(),
@@ -31,7 +38,6 @@ export async function loginAction(email: string, password: string): Promise<Logi
   // Simulate network delay
   await new Promise((resolve) => setTimeout(resolve, 1000));
 
-  // Server-side validation
   const parsed = loginSchema.safeParse({ email, password });
 
   if (!parsed.success) {
@@ -41,7 +47,6 @@ export async function loginAction(email: string, password: string): Promise<Logi
     };
   }
 
-  // Validate credentials
   if (parsed.data.email !== MOCK_USER.email || parsed.data.password !== MOCK_USER.password) {
     return {
       success: false,
@@ -49,31 +54,27 @@ export async function loginAction(email: string, password: string): Promise<Logi
     };
   }
 
-  // Create a mock session token
-  const sessionToken = crypto.randomUUID();
+  await createSession(MOCK_USER.id);
 
-  // Set secure HTTP-Only cookie
-  const cookieStore = await cookies();
+  redirect(paths.dashboard);
 
-  cookieStore.set(SESSION_COOKIE, sessionToken, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    path: '/',
-    sameSite: 'lax',
-    maxAge: 60 * 60 * 24 * 7, // 7 days
-  });
-
-  redirect('/dashboard');
-
-  // redirect() throws internally and never reaches here,
-  // but we return to satisfy the consistent-return lint rule.
   return { success: true };
 }
 
 export async function logoutAction(): Promise<void> {
-  const cookieStore = await cookies();
-
-  cookieStore.delete(SESSION_COOKIE);
+  await deleteSession();
 
   redirect(paths.login);
+}
+
+export async function getCurrentUser() {
+  const cookieStore = await cookies();
+  const token = cookieStore.get(SESSION_COOKIE)?.value;
+
+  if (!token) return null;
+
+  const payload = await decrypt(token);
+  if (!payload?.userId) return null;
+
+  return MOCK_USER;
 }
