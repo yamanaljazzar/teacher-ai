@@ -7,7 +7,6 @@ import { LazyMotion, domAnimation } from 'framer-motion';
 
 import { DirectionProvider } from 'src/components/ui/direction';
 
-import { ThemeToggle } from 'src/components/theme-toggle';
 import { ThemeProvider } from 'src/components/theme-provider';
 
 import { getCurrentUser } from 'src/auth/actions';
@@ -44,10 +43,7 @@ export default async function RootLayout({
         <DirectionProvider direction="rtl" dir="rtl">
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <LazyMotion features={domAnimation}>
-              <AuthProvider user={user}>
-                <ThemeToggle />
-                {children}
-              </AuthProvider>
+              <AuthProvider user={user}>{children}</AuthProvider>
             </LazyMotion>
           </ThemeProvider>
         </DirectionProvider>

@@ -3,6 +3,8 @@
 import Image from 'next/image';
 import { m } from 'framer-motion';
 
+import { ThemeToggle } from 'src/components/theme-toggle';
+
 // ----------------------------------------------------------------------
 
 const floatingIcons = [
@@ -131,6 +133,8 @@ export default function Main({ children }: { children: React.ReactNode }) {
 
       {/* Content */}
       {children}
+
+      <ThemeToggle className="fixed top-8 left-8 z-50" />
     </div>
   );
 }

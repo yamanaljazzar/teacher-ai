@@ -7,7 +7,9 @@ import { useState, useEffect } from 'react';
 
 import { Button } from 'src/components/ui/button';
 
-export function ThemeToggle() {
+import { cn } from 'src/lib/utils';
+
+export function ThemeToggle({ className }: { className?: string }) {
   const { setTheme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
@@ -19,7 +21,7 @@ export function ThemeToggle() {
 
   return (
     <m.div
-      className="fixed top-8 left-8 z-50"
+      className={cn(className)}
       initial={{ scale: 0, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
       transition={{
@@ -32,7 +34,7 @@ export function ThemeToggle() {
       <Button
         size="icon"
         onClick={() => setTheme(isDark ? 'light' : 'dark')}
-        className="size-14 rounded-xl text-white"
+        className="size-8 sm:size-12 md:size-14 rounded-md sm:rounded-lg md:rounded-xl text-white"
         aria-label="Toggle theme"
       >
         <Sun

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 
-import LoginView from 'src/views/auth/login-view';
+import LoginView from 'src/views/auth/view';
 
 // ----------------------------------------------------------------------
 

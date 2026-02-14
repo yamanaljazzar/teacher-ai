@@ -1,4 +1,4 @@
-import AuthLayout from 'src/layouts/auth-layout';
+import AuthLayout from 'src/layouts/auth';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return <AuthLayout>{children}</AuthLayout>;
